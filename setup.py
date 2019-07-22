@@ -1,11 +1,11 @@
 from setuptools import setup
 
-setup(name='python-listings',
+setup(name='multibeta',
       version='0.1',
-      description='python-listings',
-      url='https://gitlab.com/caixa-preta-koort/ptyhon-listings',
+      description='Tools for multivariate distributions with Beta marginals using the Ali-Mikhail-Haq copula',
+      url='https://github.com/asemic-horizon/multibeta',
       author="asemic horizon",
       author_email='example@example.com',
       license='MIT',
-      packages=['python-listings'],
+      packages=['multibeta'],
       zip_safe=False)
