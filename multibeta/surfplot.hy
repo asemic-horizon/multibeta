@@ -11,28 +11,31 @@
        &optional 
         [cmap cm.coolwarm] 
         [scatter-alpha 0.8]
-        [contour-levels 50]]
-  (setv  [fig ax] (plt.subplots :figsize (, 10 10)))
+        [levels 50]]
+  (setv [fig ax] (plt.subplots :figsize (, 10 10)))
   (setv [xmin xmax] xlims) 
   (setv [ymin ymax] ylims)
   (setv [xx yy] (meshgrid
-                          (arange xmin xmax h)
-                          (arange ymin ymax h)))
+                  (arange xmin (+ h xmax) h)
+                  (arange ymin (+ h ymax) h)))
   (setv Z (func #*(get c_ [((. xx ravel)) 
                             ((. yy ravel))])))
   (setv cf(ax.contourf xx yy 
-                      ((. Z reshape) (getattr xx "shape"))
+                      ((. Z reshape) (getattr yy "shape"))
                       :cmap cmap 
                       :alpha .9
-                      :levels contour-levels))
+                      :levels levels))
+
+
   (setv sc (ax.scatter (first points) (last points)
                       :c "k"
                       :cmap cmap
                       :alpha scatter-alpha
-                      :s 10
-                      :edgecolors "k"))
-  (ax.set_xlim (min xx) (max yy)) 
-  (ax.set_ylim (min yy) (max yy))
+                      :s 25
+                      :edgecolors "w"))
+  (ax.set_xlim xmin xmax) 
+  (ax.set_ylim ymin ymax)
+
   (plt.colorbar cf :ax ax)
  fig)
 
